@@ -93,8 +93,8 @@ namespace pendulum.Model
         private void UpdateRodAngles()
         {
             // Get acceleration.
-            double innerAcceleration = 0;
-            double outerAcceleration = 0;
+            double innerAcceleration = this.CalculateInnerAcceleration();
+            double outerAcceleration = this.CalculateOuterAcceleration();
             
             // Update velocity.
             this.v1 += innerAcceleration;

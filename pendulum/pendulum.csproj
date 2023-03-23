@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Results" />
       <Folder Include="Service" />
     </ItemGroup>
 
