@@ -1,0 +1,16 @@
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\bin\Debug\net5.0\pendulum.exe
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\bin\Debug\net5.0\pendulum.deps.json
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\bin\Debug\net5.0\pendulum.runtimeconfig.json
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\bin\Debug\net5.0\pendulum.runtimeconfig.dev.json
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\bin\Debug\net5.0\pendulum.dll
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\bin\Debug\net5.0\ref\pendulum.dll
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\bin\Debug\net5.0\pendulum.pdb
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.csproj.AssemblyReference.cache
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.GeneratedMSBuildEditorConfig.editorconfig
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.AssemblyInfoInputs.cache
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.AssemblyInfo.cs
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.csproj.CoreCompileInputs.cache
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.dll
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\ref\pendulum.dll
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.pdb
+M:\Docs\Projects\C#\College\DoublePendulum\pendulum\obj\Debug\net5.0\pendulum.genruntimeconfig.cache
