@@ -7,12 +7,12 @@ namespace pendulum.Model
         /// <summary>
         /// Length of inner and outer rod.
         /// </summary>
-        public int r1, r2;
+        public float r1, r2;
 
         /// <summary>
         /// Mass of inner and outer point masses.
         /// </summary>
-        public int m1, m2;
+        public float m1, m2;
         
         /// <summary>
         /// Angle of inner and outer rod.
@@ -34,7 +34,7 @@ namespace pendulum.Model
         /// </summary>
         public double x1, y1, x2, y2;
 
-        public DoublePendulum(int m2, double a1, double a2, double g)
+        public DoublePendulum(float m2, double a1, double a2, double g)
         {
             // Constants.
             this.SetupConstants();
@@ -51,9 +51,9 @@ namespace pendulum.Model
 
         private void SetupConstants()
         {
-            this.m1 = 10;
-            this.r1 = 125;
-            this.r2 = 125;
+            this.m1 = 0.1f;
+            this.r1 = 0.5f;
+            this.r2 = 0.5f;
             this.v1 = 0;
             this.v2 = 0;
         }
@@ -113,7 +113,7 @@ namespace pendulum.Model
 
         public override string ToString()
         {
-            return $"M1({Math.Round(this.x1, 2)} - {Math.Round(this.y1, 2)}) | M2({Math.Round(this.x2, 2)} - {Math.Round(this.y2, 2)})";
+            return $"M2({Math.Round(this.x2, 2)} - {Math.Round(this.y2, 2)})";
         }
     }
 }
