@@ -51,31 +51,35 @@ namespace pendulum.Model
 
         private void SetupConstants()
         {
-            this.m1 = 0.1f;
-            this.r1 = 0.5f;
-            this.r2 = 0.5f;
+            this.m1 = 10;
+            this.r1 = 125;
+            this.r2 = 125;
             this.v1 = 0;
             this.v2 = 0;
         }
 
         private double CalculateInnerAcceleration()
         {
-            double _p = -g * (2 * m1 + m2) * Math.Sin(a1);
-            double _q = -m2 * g * Math.Sin(a1 - 2 * a2);
-            double _r = -2 * Math.Sin(a1 - a2) * m2;
-            double _s = v2 * v2 * r2 + v1 * v1 * r1 * Math.Cos(a1 - a2);
-            double _t = r1 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2));
-            return (_p + _q + _r * _s) / _t;
+            return 
+                (
+                    -g * (2 * m1 + m2) * Math.Sin(a1)
+                    + -m2 * g * Math.Sin(a1 - 2 * a2)
+                    + -2 * Math.Sin(a1 - a2) * m2
+                    * (v2 * v2 * r2 + v1 * v1 * r1 * Math.Cos(a1 - a2))
+                )
+                / (r1 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2)));
         }
         
         private double CalculateOuterAcceleration()
         {
-            double _p = 2 * Math.Sin(a1 - a2);
-            double _q = v1 * v1 * r1 * (m1 + m2);
-            double _r = g * (m1 + m2) * Math.Cos(a1);
-            double _s = v2 * v2 * r2 * m2 * Math.Cos(a1 - a2);
-            double _t = r2 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2));
-            return _p * (_q + _r + _s) / _t;
+            return
+                2 * Math.Sin(a1 - a2)
+                  * (
+                      v1 * v1 * r1 * (m1 + m2)
+                      + g * (m1 + m2) * Math.Cos(a1)
+                      + v2 * v2 * r2 * m2 * Math.Cos(a1 - a2)
+                  )
+                / (r2 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2)));
         }
 
         private void GetPointMassPositions()
@@ -111,9 +115,14 @@ namespace pendulum.Model
             this.UpdateRodAngles();
         }
 
+        public double[] ToArray()
+        {
+            return new[] {this.x1, this.y1, this.x2, this.y2};
+        }
+
         public override string ToString()
         {
-            return $"M2({Math.Round(this.x2, 2)} - {Math.Round(this.y2, 2)})";
+            return $"{Math.Round(this.x1, 2)};{Math.Round(this.y1, 2)};{Math.Round(this.x2, 2)};{Math.Round(this.y2, 2)};";
         }
     }
 }
