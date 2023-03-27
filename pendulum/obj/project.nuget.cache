@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NCoTp222VSOqGRmy+4W+UIRV1prtcMjoWGkjip7c6A5XoOVl2Lh5LjbTgGXZm/4Tcml9XEnjZA7PPjuXex0bqg==",
+  "dgSpecHash": "9yvwNUyrj7FgjBXY6wQu92A2NYRdEAJgBbY0gYBpXGF/GvMp5+itlOJuQnxe8hnJ52MqueKiCFRL6b8UAl/nHQ==",
   "success": true,
-  "projectFilePath": "M:\\Docs\\Projects\\C#\\College\\DoublePendulum\\pendulum\\pendulum.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Projects\\c#\\DoublePendulum\\pendulum\\pendulum.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nisse\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
   "logs": []
 }

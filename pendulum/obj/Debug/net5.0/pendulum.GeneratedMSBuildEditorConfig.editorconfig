@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = pendulum
-build_property.ProjectDir = M:\Docs\Projects\C#\College\DoublePendulum\pendulum\
+build_property.ProjectDir = C:\Projects\c#\DoublePendulum\pendulum\
