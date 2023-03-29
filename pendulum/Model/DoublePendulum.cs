@@ -1,9 +1,12 @@
 using System;
+using System.Transactions;
 
 namespace pendulum.Model
 {
     public class DoublePendulum
     {
+        public double f;
+        
         /// <summary>
         /// Length of inner and outer rod.
         /// </summary>
@@ -51,33 +54,40 @@ namespace pendulum.Model
 
         private void SetupConstants()
         {
+            this.f = 1 / 200f;
             this.m1 = 10;
             this.r1 = 125;
             this.r2 = 125;
             this.v1 = 0;
             this.v2 = 0;
         }
-
-        private double CalculateInnerAcceleration()
+        
+        /// <summary>
+        /// Theta`` = acc
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        private double F1(double v)
         {
             return 
                 (
                     -g * (2 * m1 + m2) * Math.Sin(a1)
                     + -m2 * g * Math.Sin(a1 - 2 * a2)
                     + -2 * Math.Sin(a1 - a2) * m2
-                    * (v2 * v2 * r2 + v1 * v1 * r1 * Math.Cos(a1 - a2))
+                    * (v2 * v2 * r2 + v * v * r1 * Math.Cos(a1 - a2))
                 )
                 / (r1 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2)));
         }
         
-        private double CalculateOuterAcceleration()
+        private double F2(double v)
         {
             return
                 2 * Math.Sin(a1 - a2)
                   * (
                       v1 * v1 * r1 * (m1 + m2)
                       + g * (m1 + m2) * Math.Cos(a1)
-                      + v2 * v2 * r2 * m2 * Math.Cos(a1 - a2)
+                      + v * v * r2 * m2 * Math.Cos(a1 - a2)
                   )
                 / (r2 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2)));
         }
@@ -93,26 +103,59 @@ namespace pendulum.Model
             this.y2 = this.y1 + this.r2 * Math.Cos(this.a2);
 
         }
-
-        private void UpdateRodAngles()
+        
+        private double RungeKuttaV1()
         {
-            // Get acceleration.
-            double innerAcceleration = this.CalculateInnerAcceleration();
-            double outerAcceleration = this.CalculateOuterAcceleration();
+            double a = this.F1(this.v1);
+            double b = this.F1(this.v1 + 0.5 * a);
+            double c = this.F1(this.v1 + 0.5 * b);
+            double d = this.F1(this.v1 + c);
+
+            return (1 / 6f) * (a + 2 * b + 2 * c + d);
+        }
+        
+        private double RungeKuttaV2()
+        {
+            double a = this.F2(this.v2);
+            double b = this.F2(this.v2 + 0.5 * a);
+            double c = this.F2(this.v2 + 0.5 * b);
+            double d = this.F2(this.v2 + c);
+
+            return (1 / 6f) * (a + 2 * b + 2 * c + d);
+        }
+
+        private double ApplyFriction(double v)
+        {
+            if (v < 0)
+            {
+                return v += v * v * this.f;
+            }
             
+            return v -= v * v * this.f;
+        }
+
+        private void ApplyRungeKutta()
+        {
             // Update velocity.
-            this.v1 += innerAcceleration;
-            this.v2 += outerAcceleration;
-            
+            double r1 = this.RungeKuttaV1();
+            double r2 = this.RungeKuttaV2();
+
+            this.v1 += r1;
+            this.v2 += r2;
+
+            // Friction
+            this.v1 = this.ApplyFriction(this.v1);
+            this.v2 = this.ApplyFriction(this.v2);
+
             // Update angle.
-            this.a1 += this.v1;
-            this.a2 += this.v2;
+            this.a1 += this.v1 * (1 / 100f);
+            this.a2 += this.v2 * (1 / 100f);
         }
 
         public void Step()
         {
             this.GetPointMassPositions();
-            this.UpdateRodAngles();
+            this.ApplyRungeKutta();
         }
 
         public double[] ToArray()

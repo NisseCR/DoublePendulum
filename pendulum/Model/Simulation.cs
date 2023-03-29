@@ -29,7 +29,7 @@ namespace pendulum.Model
 
         private string FormatValue(double v)
         {
-            return $"{Math.Round(v, 2)};";
+            return $"{Math.Round(v, 2)};".Replace(',', '.');
         }
         
         private string FormatCollection(double[] data)
@@ -52,16 +52,23 @@ namespace pendulum.Model
 
         public void Run()
         {
-            DoublePendulum pen = new DoublePendulum(15, Math.PI / 2, Math.PI / 2, 1);
+            Pendulum pen = new Pendulum();
 
             int n = 0;
             while (true)
             {
                 this.results.Add(pen.ToArray());
+                Console.WriteLine(pen);
                 pen.Step();
                 n++;
 
-                if (n > 500000)
+                if (Double.IsNaN(pen.x1))
+                {
+                    Console.WriteLine(n);
+                    break;
+                }
+
+                if (n > 10000)
                 {
                     break;
                 }
